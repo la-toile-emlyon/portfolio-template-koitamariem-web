@@ -61,15 +61,6 @@ body {
 nav {
   border-radius: 0 0 var(--radius-nav) var(--radius-nav);
   overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  gap: 60px;
-  align-items: flex-start;
-}
-ul {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
 }
 
 nav a{
@@ -249,7 +240,7 @@ main {
 
 .projet-card {
   width: 100%;
-  height: 56dvh;
+  min-height: 56dvh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--gap);
