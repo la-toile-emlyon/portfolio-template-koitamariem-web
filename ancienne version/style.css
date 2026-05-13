@@ -79,12 +79,14 @@ nav a{
 
 
 .logo {
-  color: var(--blanc);
+ color: #000;
   font-size: var(--fs-nav);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
+  padding: 100px;
+  width: 100px;
 }
 
 .nav-links {
@@ -184,9 +186,9 @@ main {
 }
 
 .competence-card h3 {
-  font-size: var(--fs-h3);
-  font-weight: 400;
-  margin-bottom: var(--gap);
+   font-size: var(--fs-h3);
+   font-weight: 400;
+   margin-bottom: var(--gap);
 }
 
 .competence-card p {
@@ -250,9 +252,8 @@ main {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
 }
 
-/* Les cartes paires (2e, 4e...) : image à gauche, contenu à droite */
-.projet-card:nth-of-type(even) .projet-image {
-  order: -1;
+.projet-card.reverse {
+  direction: ltr;
 }
 
 .projet-top, .projet-bottom {
