@@ -53,6 +53,11 @@ fetch('data.json')
     function genererLiens(liens) {
       let html = '';
       // TODO : forEach sur liens → construire les <li><a href="...">...</a></li>
+      liens.forEach(lien => {
+        html = html + `<li><a href="${lien.url}">${lien.label}</a></li>`;
+        
+      });
+      
       return html;
     }
 
@@ -61,10 +66,21 @@ fetch('data.json')
     //  NAV
     // --------------------------------------------------
 
-    // TODO : remplir le logo        → logoNav.textContent = ...
+    // TODO : remplir le logo        → 
+    console.log(data.logo);
+    
+    logoNav.textContent = data.logo;
     // TODO : injecter les liens     → liensNav.innerHTML  = genererLiens(...)
+    liensNav.innerHTML  = genererLiens(data.nav);
+    
+    
+
+
     // TODO : remplir le bouton CTA  → ctaNav.textContent  = ...
+    ctaNav.textContent  = data.cta.label;
+    ctaNav.href          = data.cta.href;
     //                                 ctaNav.href          = ...
+
 
 
     // --------------------------------------------------
@@ -74,7 +90,11 @@ fetch('data.json')
     // Le titre contient un mot en italique (balise <em>)
     // On utilise innerHTML pour pouvoir insérer des balises HTML
     // TODO : heroTitre.innerHTML = `${data.hero.titre} <em>${...}</em><br>${...}`
+
+    heroTitre.innerHTML = `${data.hero.titre} <em>${data.hero.accent}</em><br>${data.hero.suite}`
     // TODO : heroSousTitre.textContent = ...
+
+    heroSousTitre.textContent = data.hero.sousTitre;
 
 
     // --------------------------------------------------
@@ -91,6 +111,19 @@ fetch('data.json')
     // </div>
     //
     // → sectionCompetences.insertAdjacentHTML('beforeend', carte)
+    data.competences.forEach(competence => {
+  const carte = `
+    <div class="competence-card">
+      <h3>${competence.titre}</h3>
+      <p>${competence.description}</p>
+      <div class="tags">
+        ${genererTags(competence.tags)}
+      </div>
+    </div>
+  `;
+
+  sectionCompetences.insertAdjacentHTML('beforeend', carte);
+});
 
 
     // --------------------------------------------------
@@ -119,7 +152,35 @@ fetch('data.json')
     //
     // → sectionProjets.insertAdjacentHTML('beforeend', carte)
 
+    data.projets.forEach(projet => {
+  const carte = `
+    <article class="projet-card">
+      <div class="projet-content">
+        <div class="projet-top">
+          <h3>${projet.titre}</h3>
+          <div class="tags">
+            ${genererTags(projet.tags)}
+          </div>
+        </div>
 
+        <div class="projet-bottom">
+          <p>${projet.description}</p>
+          <a href="${projet.lien}" class="btn-projet">
+            VOIR LE PROJET ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="projet-image">
+        <img src="${projet.image}" alt="${projet.titre}">
+      </div>
+    </article>
+  `;
+
+  sectionProjets.insertAdjacentHTML('beforeend', carte);
+});
+
+    
     // --------------------------------------------------
     //  PARCOURS
     // --------------------------------------------------
@@ -135,13 +196,34 @@ fetch('data.json')
     // → listeParcours.insertAdjacentHTML('beforeend', item)
 
 
+
+    data.parcours.forEach(parcours => {
+  const item = `
+    <li class="parcours-item">
+      <p class="parcours-titre">
+        ${parcours.annee} - ${parcours.titre}
+      </p>
+      <p class="parcours-lieu">
+        ${parcours.lieu}
+      </p>
+    </li>
+  `;
+
+  listeParcours.insertAdjacentHTML('beforeend', item);
+});
+
+
     // --------------------------------------------------
     //  FOOTER — même logique que la nav
     // --------------------------------------------------
 
     // TODO : logoFooter.textContent  = ...
+
+    logoFooter.textContent  = data.logo;
     // TODO : liensFooter.innerHTML   = genererLiens(...)
+    liensFooter.innerHTML  = genererLiens(data.nav);
     // TODO : ctaFooter.textContent   = ...
     //        ctaFooter.href          = ...
-
+ ctaFooter.textContent  = data.cta.label;
+    ctaFooter.href          = data.cta.href;
   });
